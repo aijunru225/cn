@@ -1,0 +1,484 @@
+:root {
+    --accent: #1f5fae;        /* deep blue; change here to re-theme the whole site */
+    --accent-dark: #164a8a;
+    --accent-soft: #eaf2fc;
+}
+/* style.css */
+
+/* --- 全局设置 --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f6f9;
+}
+
+a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--accent-dark); text-decoration: none; }
+
+/* --- 顶部导航栏 --- */
+header {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #eaeaea;
+    position: sticky;
+    top: 0;
+    z-index: 9999; /* ✅ 提高层级，避免手机端被内容盖住 */
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+nav {
+    max-width: 1450px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 名字 (Logo) */
+.nav-brand {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #222;
+    cursor: pointer;
+    width: 240px;
+    flex-shrink: 0;
+}
+
+/* ✅ 手机端汉堡按钮（默认隐藏，移动端显示） */
+.nav-toggle {
+    display: none;
+    margin-left: auto;
+    border: 0;
+    background: transparent;
+    font-size: 22px;
+    padding: 10px 12px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* 导航链接组 */
+.nav-links {
+    display: flex;
+    align-items: center;
+    margin-left: 60px;
+    gap: 15px;
+}
+
+.nav-btn {
+    font-size: 1rem;
+    color: #555;
+    font-weight: 500;
+    padding: 8px 20px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover, .nav-btn.active {
+    color: var(--accent);
+    background-color: var(--accent-soft);
+}
+
+.fa-cog { color: #999; cursor: pointer; margin-left: 20px; transition: color 0.2s; }
+.fa-cog:hover { color: #555; }
+
+
+/* --- 核心布局 --- */
+.container {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 40px 40px;
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+/* --- 左侧侧边栏 (Sidebar) --- */
+.sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    text-align: left;
+
+    position: sticky;
+    top: 110px; /* Header(80) + 视觉间距(30) */
+
+    height: fit-content;
+}
+
+.profile-img {
+    width: 100%;
+    max-width: 220px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border: 5px solid #fff;
+}
+
+.sidebar-name { font-size: 1.3rem; font-weight: 700; color: #111; margin-bottom: 5px; }
+.sidebar-title { font-size: 0.95rem; color: #555; margin-bottom: 15px; line-height: 1.4; }
+.sidebar-school { font-size: 0.9rem; color: #666; margin-bottom: 25px; line-height: 1.4; }
+
+.sidebar-info { list-style: none; font-size: 0.95rem; color: #555; }
+.sidebar-info li { margin-bottom: 14px; display: flex; align-items: center; }
+.sidebar-info i { width: 24px; margin-right: 12px; color: #777; text-align: center; font-size: 1.1rem; }
+
+
+/* --- 右侧主要内容 (Main Content) --- */
+.main-content {
+    flex-grow: 1;
+    max-width: 100%;
+
+    background-color: #fff;
+    padding: 50px 60px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+.main-header-name { font-size: 2.5rem; font-weight: 700; margin-bottom: 8px; color: #111; letter-spacing: -0.5px;}
+.main-header-title { font-size: 1.2rem; font-weight: 600; color: #444; margin-bottom: 5px; }
+.main-header-dept { font-style: italic; color: #777; margin-bottom: 35px; font-size: 1.05rem; }
+.bio-text p { margin-bottom: 20px; text-align: justify; color: #333; font-size: 1.05rem; line-height: 1.7; }
+.section-title { font-size: 1.6rem; font-weight: 700; margin-top: 60px; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0; color: #222; letter-spacing: -0.3px; }
+
+/* 列表样式 */
+.content-list li { margin-bottom: 30px; }
+.list-header { font-weight: 700; color: #111; font-size: 1.1rem; margin-bottom: 6px; }
+.list-sub { color: #666; font-style: italic; margin-bottom: 10px; font-size: 1rem;}
+ul.bullet-list { list-style-type: disc; margin-left: 20px; color: #444; font-size: 1rem; line-height: 1.7; }
+
+/* --- Publications 专属样式 --- */
+.pub-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.pub-card {
+    display: block;
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+    cursor: pointer;
+}
+
+.pub-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    border-color: var(--accent-soft);
+}
+
+.pub-img-wrapper {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    position: relative;
+    border-bottom: 1px solid #f0f0f0;
+    background-color: #f8f9fa;
+}
+
+.pub-img-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: filter 0.4s ease;
+}
+
+.pub-card:hover .pub-img-wrapper img {
+    filter: grayscale(0%);
+}
+
+.pub-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8a8f98;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border: 2px dashed #d8dee6;
+    background: #f8f9fa;
+}
+
+.pub-content { padding: 30px; }
+.pub-title { font-size: 1.5rem; font-weight: 700; color: #222; margin-bottom: 10px; }
+.pub-card:hover .pub-title { color: var(--accent); }
+.pub-meta { font-size: 1rem; color: #666; margin-bottom: 15px; font-style: italic; }
+.pub-keywords { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+.keyword-tag { background-color: #f1f5f9; color: #475569; font-size: 0.9rem; padding: 6px 12px; border-radius: 6px; border: 1px solid #e2e8f0; }
+
+.experience-compact-list {
+    display: grid;
+    gap: 12px;
+}
+
+.experience-compact-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #eceff3;
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: #fafbfc;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.experience-compact-card:hover {
+    border-color: #cfd9e5;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
+}
+
+.experience-row-top {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.experience-lab {
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.experience-role {
+    color: #4b5563;
+    font-size: 0.95rem;
+}
+
+.experience-time {
+    margin-left: auto;
+    color: #6b7280;
+    font-size: 0.92rem;
+    white-space: nowrap;
+}
+
+.experience-row-sub {
+    margin-top: 6px;
+    color: #6b7280;
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.experience-row-sub-advisor {
+    margin-top: 4px;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.experience-project-link {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dashed #9bbfe7;
+}
+
+.experience-project-link:hover {
+    color: #084b8a;
+    border-bottom-color: #084b8a;
+}
+
+.experience-row-sub-advisor a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.experience-row-sub-advisor a:hover {
+    text-decoration: underline;
+}
+
+/* Research 页面 */
+.project-block { margin-bottom: 50px; border: 1px solid #f0f0f0; padding: 30px; border-radius: 12px; background: #fafafa;}
+.proj-title { font-size: 1.4rem; font-weight: 700; color: #222; margin-bottom: 8px; }
+.proj-desc p { font-size: 1rem; }
+
+/* Footer */
+.footer-section { margin-top: 80px; padding-top: 30px; border-top: 2px solid #f5f5f5; }
+.footer-note { font-style: italic; color: #666; margin-bottom: 25px; font-size: 1rem; }
+.btn-download { display: inline-block; background-color: #374151; color: #fff; padding: 12px 28px; border-radius: 8px; font-weight: 500; font-size: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.btn-download:hover { background-color: #1f2937; transform: translateY(-2px); color: #fff; }
+
+/* ===========================
+   ✅ 手机/平板适配（关键修复）
+   =========================== */
+@media (max-width: 1000px) {
+
+    /* ✅ header/nav 不要固定高度，否则菜单展开会溢出压住正文 */
+    header { height: auto; }
+    nav {
+        padding: 10px 16px;
+        height: auto;
+        position: relative;     /* 给 dropdown 做定位 */
+        flex-wrap: nowrap;
+    }
+
+    /* 页面从左右两列改成上下 */
+    .container {
+        flex-direction: column;
+        gap: 24px;
+        padding: 18px 16px;
+    }
+
+    .sidebar {
+        width: 100%;
+        text-align: center;
+        position: static;
+        top: auto;
+    }
+
+    .profile-img { margin-left: auto; margin-right: auto; }
+    .main-content { padding: 22px 18px; }
+
+    /* ✅ 手机端显示汉堡按钮 */
+    .nav-brand { width: auto; }
+    .nav-toggle {
+        display: inline-flex;
+        margin-left: auto;
+    }
+
+    /* ✅ 下拉菜单：默认隐藏；展开时作为 dropdown 出现（有白底，不透明） */
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;              /* 紧贴 nav 底部 */
+        left: 0;
+        right: 0;
+
+        background: rgba(255, 255, 255, 0.98);  /* ✅ 不透明白底 */
+        backdrop-filter: blur(10px);
+
+        border-bottom: 1px solid #eaeaea;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+
+        margin-left: 0;
+        padding: 10px 12px 14px;
+
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+
+        z-index: 9999;          /* ✅ 确保盖在内容上 */
+    }
+
+    .nav-btn {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 10px;
+    }
+
+    /* ✅ 打开状态 */
+    nav.nav-open .nav-links {
+        display: flex;
+    }
+}
+
+/* ===========================
+   Additions for Junru's sites
+   =========================== */
+html { overflow-x: hidden; }
+.sidebar-info li { align-items: flex-start; }
+.sidebar-info a { word-break: break-word; }
+
+/* Research interests as chips */
+#interests-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.interest-chip { background: var(--accent-soft); color: var(--accent-dark); padding: 6px 14px; border-radius: 999px; font-size: 0.95rem; font-weight: 500; }
+
+/* Education rows */
+.content-list { list-style: none; }
+.list-header-row { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; flex-wrap: wrap; }
+.list-period, .experience-time { color: #6b7280; font-size: 0.95rem; white-space: nowrap; }
+
+/* Experience cards with bullets */
+.experience-compact-list { gap: 16px; }
+.experience-compact-card { padding: 18px 20px; }
+.experience-compact-card:hover { transform: none; }
+.experience-row-top { justify-content: space-between; flex-wrap: wrap; }
+.experience-lab { font-size: 1.05rem; }
+.experience-role { display: block; margin: 4px 0 8px; font-style: italic; }
+.experience-sup { font-style: normal; color: #6b7280; }
+.experience-compact-card ul.bullet-list { font-size: 0.97rem; }
+.experience-compact-card ul.bullet-list li { margin-bottom: 4px; }
+
+/* Research cards without detail pages */
+.pub-grid { gap: 24px; }
+.pub-card.static { cursor: default; }
+.pub-card.static:hover { transform: none; box-shadow: 0 6px 18px rgba(0,0,0,0.05); }
+.pub-card.static:hover .pub-title { color: #222; }
+.pub-content { padding: 26px 28px; }
+.pub-title { font-size: 1.25rem; line-height: 1.4; }
+.pub-type { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.pub-meta { margin-bottom: 12px; }
+.pub-card ul.bullet-list { font-size: 0.98rem; }
+.pub-keywords { margin-top: 16px; }
+.pub-intro { color: #555; margin-bottom: 26px; line-height: 1.7; }
+
+/* News */
+.news-year { font-size: 1.4rem; font-weight: 800; color: #222; margin: 26px 0 8px; }
+.news-year-block:first-child .news-year { margin-top: 0; }
+.news-list { list-style: none; border-left: 2px solid var(--accent-soft); margin-left: 4px; }
+.news-list li { display: grid; grid-template-columns: 76px 1fr; gap: 12px; padding: 8px 0 8px 18px; line-height: 1.7; color: #333; }
+.news-date { font-weight: 700; color: var(--accent); white-space: nowrap; }
+
+/* About */
+.about-intro p { margin: 0 0 12px; line-height: 1.85; color: #444; }
+.about-section { margin-top: 30px; }
+.about-section h3 { font-size: 1.2rem; color: #222; margin: 0 0 10px; border-left: 4px solid var(--accent); padding-left: 10px; }
+.about-desc { margin: 0 0 14px; color: #444; line-height: 1.8; }
+.media-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.media-grid.single { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
+.media-block { margin: 0; }
+.media-visual { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 10px; background: #eee; }
+.media-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.media-title { margin-top: 8px; font-size: 0.92rem; color: #666; }
+
+/* Contact */
+.contact-intro p { margin: 0 0 10px; line-height: 1.85; color: #444; }
+.contact-list { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
+.contact-row { display: grid; grid-template-columns: 22px 110px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; padding: 6px 0; }
+.contact-row i { color: #555; }
+.contact-label { font-weight: 700; color: #222; }
+.contact-value { color: #444; word-break: break-word; }
+.contact-note { margin-left: 8px; font-size: 0.9rem; color: #777; font-style: italic; }
+.copy-btn { border: 0; background: transparent; color: var(--accent); cursor: pointer; font-size: 0.95rem; font-weight: 600; }
+.copy-btn:hover { text-decoration: underline; }
+.contact-footer { margin-top: 18px; color: #555; line-height: 1.8; }
+
+/* Site footer */
+.site-footer { text-align: center; color: #9aa0a6; font-size: 0.85rem; padding: 10px 16px 36px; }
+
+@media (max-width: 1000px) {
+    .main-header-name { font-size: 2rem; }
+    .section-title { margin-top: 44px; font-size: 1.4rem; }
+    .bio-text p { text-align: left; }
+    .sidebar-info { display: inline-block; text-align: left; }
+    .profile-img { max-width: 180px; }
+}
+@media (max-width: 640px) {
+    .media-grid { grid-template-columns: minmax(0, 1fr); }
+    .news-list li { grid-template-columns: 1fr; gap: 0; }
+    .contact-row { grid-template-columns: 22px minmax(0, 1fr) auto; }
+    .contact-label { display: none; }
+    .pub-content { padding: 20px; }
+    .experience-compact-card { padding: 14px 14px; }
+}
+.content-list ul li { margin-bottom: 2px; }
+.sidebar-info li { font-size: 0.9rem; }
+.name-alt { white-space: nowrap; }
